@@ -23,7 +23,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="logo">Logo</label>
-                    <input type="file" name="logo" id="logo" class="rounded-lg">
+                    <input type="file" accept="image/*" name="logo" id="logo" class="rounded-lg">
                 </div>
                 <button class="text-white bg-green-500 hover:bg-green-400 rounded-lg px-10 py-2" type="submit">
                     Simpan

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Galery;
 use App\Models\Link;
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        if(Auth::user()->role == 'storeadmin')
+        {
+            $store = Store::where('user_id',Auth::user()->id)->with('products')->first();
+            $product = $store->products;
+        }else{
+            $product = Product::all();
+        }
         return view('master.product.index', compact('product'));
     }
 

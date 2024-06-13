@@ -28,11 +28,11 @@
                 <p class="text-xl font-bold">Kategori</p>
             </div>
             <div class="flex flex-wrap justify-center items-end gap-4 text-sm">
-                @for ($i = 0; $i < 4; $i++)
+                @foreach ($category as $item)
                     <div class=" border rounded-md p-5 border-gray-400">
-                        <p>Pashmina</p>
+                        <p>{{$item->name}}</p>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
         <div class="w-full border-t border-gray-300 mb-7">
@@ -57,19 +57,19 @@
             </div>
             <div>
                 <div class="grid grid-cols-4 gap-10">
-                    @for ($i = 0; $i < 4; $i++)
+                    @foreach ($product as $item)
                         <div class="shadow-lg rounded-lg">
-                            <img src="https://dynamic.zacdn.com/QpvDebfsVsm3E5d24xnT80gXXMk=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/lozy-hijab-3444-8723193-1.jpg"
+                            <img src="{{asset('storage/images/product/')}}/{{$item->foto}}"
                                 alt="" class="aspect-square object-cover rounded-t-lg mb-1">
                             <div class="p-3">
-                                <p class="mb-1 font-bold line-clamp-1">Hijab Pashmina</p>
+                                <p class="mb-1 font-bold line-clamp-1">{{$item->name}}</p>
                                 <div class="flex gap-3 items-end">
-                                    <p class="text-green-500 font-bold text-sm">Rp. 18.000</p>
-                                    <p class="line-through text-gray-600 text-xs">Rp. 20.000</p>
+                                    <p class="text-green-500 font-bold text-sm">Rp. {{$item->price}}</p>
+                                    <p class="line-through text-gray-600 text-xs">Rp. {{$item->price + 2000}}</p>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                 </div>
             </div>
@@ -87,19 +87,20 @@
             </div>
             <div>
                 <div class="grid grid-cols-4 gap-10">
-                    @for ($i = 0; $i < 8; $i++)
+                    @foreach ($product as $item)
                         <div class="shadow-lg rounded-lg">
-                            <img src="https://dynamic.zacdn.com/QpvDebfsVsm3E5d24xnT80gXXMk=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/lozy-hijab-3444-8723193-1.jpg"
+                            <img src="{{asset('storage/images/product/')}}/{{$item->foto}}"
                                 alt="" class="aspect-square object-cover rounded-t-lg mb-1">
                             <div class="p-3">
-                                <p class="mb-1 font-bold line-clamp-1">Hijab Pashmina</p>
+                                <a href="" class="mb-1 font-bold line-clamp-1 text-lg">{{$item->store->name}}</a>
+                                <p class="mb-1 font-bold line-clamp-1">{{$item->name}}</p>
                                 <div class="flex gap-3 items-end">
-                                    <p class="text-green-500 font-bold text-sm">Rp. 18.000</p>
-                                    <p class="line-through text-gray-600 text-xs">Rp. 20.000</p>
+                                    <p class="text-green-500 font-bold text-sm">Rp. {{$item->price}}</p>
+                                    <p class="line-through text-gray-600 text-xs">Rp. {{$item->price + 2000}}</p>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
             <div class="w-full flex justify-center">

@@ -12,4 +12,8 @@ class Store extends Model
     {
         return $this->belongsToMany(Merchant::class, 'pivot_merchant_store');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
