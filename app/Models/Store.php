@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
+    public function merchant()
+    {
+        return $this->belongsToMany(Merchant::class, 'pivot_merchant_store');
+    }
 }
