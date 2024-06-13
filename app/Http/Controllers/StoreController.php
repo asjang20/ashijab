@@ -35,13 +35,13 @@ class StoreController extends Controller
         $store->address = $request->address;
         $store->telp = $request->telp;
         $store->user_id = Auth::user()->id;
-        
-        
+
+
         $file = $request->file('logo');
-        if($request->hasFile('logo')){
+        if ($request->hasFile('logo')) {
             $nama_logo = date('y-m-d') . $file->getClientOriginalName();
-            $file->move(public_path('storage/images/store/'),$nama_logo);
-        $store->logo = $nama_logo;
+            $file->move(public_path('storage/images/store/'), $nama_logo);
+            $store->logo = $nama_logo;
         }
 
         $store->save();
@@ -61,7 +61,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        //
+        return view('master.store.edit', compact('store'));
     }
 
     /**
@@ -69,7 +69,21 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        //
+        $store->name = $request->name;
+        $store->description = $request->description;
+        $store->address = $request->address;
+        $store->telp = $request->telp;
+
+        $file = $request->file('logo');
+        if ($request->hasFile('logo')) {
+            unlink('storage/images/store/' . $store->logo);
+            $nama_logo = date('y-m-d') . $file->getClientOriginalName();
+            $file->move(public_path('storage/images/store/'), $nama_logo);
+            $store->logo = $nama_logo;
+        }
+
+        $store->save();
+        return redirect()->route('product.index');
     }
 
     /**
