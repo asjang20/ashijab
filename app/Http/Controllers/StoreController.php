@@ -13,7 +13,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $store = Store::all();
+        return view('master.store.index', compact('store'));
     }
 
     /**
@@ -55,6 +56,10 @@ class StoreController extends Controller
     {
         //
     }
+    public function userShow(Store $store)
+    {
+        return view('master.store.user.show', compact('store'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -62,6 +67,14 @@ class StoreController extends Controller
     public function edit(Store $store)
     {
         return view('master.store.edit', compact('store'));
+    }
+
+    public function confirm(Store $store)
+    {
+        $store->is_accept = true;
+        $store->save();
+
+        return back();
     }
 
     /**

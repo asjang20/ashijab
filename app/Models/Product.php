@@ -17,4 +17,12 @@ class Product extends Model
     {
         return $this->belongsTo(Store::class);
     }
+    public function link()
+    {
+        return $this->hasMany(Link::class);
+    }
+    public function gallery()
+    {
+        return $this->hasMany(Galery::class);
+    }
 }

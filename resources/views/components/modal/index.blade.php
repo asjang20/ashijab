@@ -41,9 +41,6 @@
                                 <td class="px-3 py-1 text-center">Gambar Produk</td>
                                 <td class="px-3 py-1">Harga</td>
                                 <td class="px-3 py-1">Kategori</td>
-                                @if (Auth::user()->role == 'superadmin')
-                                    <td class="px-3 py-1">Status</td>
-                                @endif
                                 <td class="px-3 py-1">Action</td>
                             </tr>
                         </thead>
@@ -58,9 +55,6 @@
                                     </td>
                                     <td class="px-3 py-1">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td class="px-3 py-1">{{ $item->category->name }}</td>
-                                    @if (Auth::user()->role == 'superadmin')
-                                        <td class="px-3 py-1">{{ $item->is_accept ? 'Accepted' : 'Pending' }}</td>
-                                    @endif
                                     <td class="px-3 py-1 flex gap-3 items-center justify-center h-full w-full">
                                         <div>
                                             <form action="{{ route('product.destroy', $item->id) }}" method="POST">

@@ -16,11 +16,10 @@ class isHaveStore
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->store ) {
+        if (Auth::user()->store || Auth::user()->role == 'superadmin') {
             return $next($request);
-        }else{
+        } else {
             return redirect()->route('store.create');
         }
-
     }
 }
