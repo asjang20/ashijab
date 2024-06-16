@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('telp');
             $table->string('logo');
+            $table->boolean('is_accept')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

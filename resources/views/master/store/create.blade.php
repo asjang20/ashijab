@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="bg-white p-5 rounded-lg">
+        <p class="text-xl font-extrabold py-2 border-b mb-2">Buat Toko Online Anda</p>
         <form action="{{ route('store.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('POST')
@@ -23,7 +24,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="logo">Logo</label>
-                    <input type="file" accept="image/*" name="logo" id="logo" class="rounded-lg">
+                    <input type="file" accept="image/*" name="logo" id="logo" class="rounded-lg" required>
                 </div>
                 <button class="text-white bg-green-500 hover:bg-green-400 rounded-lg px-10 py-2" type="submit">
                     Simpan

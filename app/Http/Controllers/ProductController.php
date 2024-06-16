@@ -17,11 +17,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role == 'storeadmin')
-        {
-            $store = Store::where('user_id',Auth::user()->id)->with('products')->first();
+        if (Auth::user()->role == 'storeadmin') {
+            $store = Store::where('user_id', Auth::user()->id)->with('products')->first();
             $product = $store->products;
-        }else{
+        } else {
             $product = Product::all();
         }
         return view('master.product.index', compact('product'));
@@ -95,6 +94,17 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+    public function userShow(Product $product)
+    {
+        return view('master.product.user.show', compact('product'));
+    }
+
+    public function confirm(Product $product)
+    {
+        $product->is_accept = true;
+        $product->save();
+        return back();
     }
 
     /**

@@ -22,7 +22,7 @@
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
         <main>
-            <div class="max-w-7xl mx-auto p-10">
+            <div class="max-w-7xl mx-auto p-10 pt-[104px]">
                 {{ $slot }}
             </div>
         </main>
