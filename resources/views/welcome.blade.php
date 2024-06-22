@@ -29,9 +29,11 @@
             </div>
             <div class="flex flex-wrap justify-center items-end gap-4 text-sm">
                 @foreach ($category as $item)
-                    <div class=" border rounded-md p-5 border-gray-400">
-                        <p>{{ $item->name }}</p>
-                    </div>
+                    <a href="{{ route('user.product.category', $item->id) }}">
+                        <div class=" border rounded-md p-5 border-gray-400">
+                            <p>{{ $item->name }}</p>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -50,14 +52,16 @@
                 <p class="text-xl font-bold">Product Terbaru</p>
             </div>
             <div class="w-full flex justify-end">
-                <button
-                    class="px-10 py-2 bg-green-500 text-white  rounded-lg text-sm my-7 hover:bg-green-400 transition-all duration-500">
-                    View All
-                    Products</button>
+                <a href="{{ route('user.product.index') }}">
+                    <button
+                        class="px-10 py-2 bg-green-500 text-white  rounded-lg text-sm my-7 mx-auto hover:bg-green-400 transition-all duration-500">
+                        View All
+                        Products</button>
+                </a>
             </div>
             <div>
                 <div class="grid grid-cols-5 gap-10">
-                    @foreach ($product as $item)
+                    @foreach ($product->take(5) as $item)
                         <a href="{{ route('user.product.show', $item->id) }}" class="shadow-lg rounded-lg">
                             <img src="{{ asset('storage/images/product/') }}/{{ $item->foto }}" alt=""
                                 class="aspect-square object-cover rounded-t-lg mb-1">
@@ -72,7 +76,6 @@
                             </div>
                         </a>
                     @endforeach
-
                 </div>
             </div>
         </div>
@@ -89,7 +92,7 @@
             </div>
             <div>
                 <div class="grid grid-cols-5 gap-10">
-                    @foreach ($product as $item)
+                    @foreach ($product->take(5) as $item)
                         <a href="{{ route('user.product.show', $item->id) }}" class="shadow-lg rounded-lg">
                             <img src="{{ asset('storage/images/product/') }}/{{ $item->foto }}" alt=""
                                 class="aspect-square object-cover rounded-t-lg mb-1">
@@ -107,10 +110,13 @@
                 </div>
             </div>
             <div class="w-full flex justify-center">
-                <button
-                    class="px-10 py-2 bg-green-500 text-white  rounded-lg text-sm my-7 mx-auto hover:bg-green-400 transition-all duration-500">
-                    View All
-                    Products</button>
+
+                <a href="{{ route('user.product.index') }}">
+                    <button
+                        class="px-10 py-2 bg-green-500 text-white  rounded-lg text-sm my-7 mx-auto hover:bg-green-400 transition-all duration-500">
+                        View All
+                        Products</button>
+                </a>
             </div>
         </div>
     </div>
