@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -37,21 +38,16 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
 
 Route::middleware(['auth', 'isHaveStore'])->group(function () {
-    Route::resource(
-        'admin/product/',
-        ProductController::class,
-        ['names' => [
-            'index' => 'product.index',
-            'store' => 'product.store',
-            'update' => 'product.update',
-            'create' => 'product.create',
-            'destroy' => 'product.destroy',
-            'edit' => 'product.edit'
-        ]]
-    );
+    Route::get('admin/product', [ProductController::class, 'index'])->name('product.index');
+    Route::post('admin/product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('admin/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('admin/product/{product}/update', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('admin/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
 });
 
-Route::get('product/{product}', [ProductController::class, 'userShow'])->name('user.product.show');
+Route::get('products/{product}', [ProductController::class, 'userShow'])->name('user.product.show');
+Route::get('products/', [ProductController::class, 'userIndex'])->name('user.product.index');
+Route::get('kategori/product/{kategori}', [CategoryController::class, 'productFilter'])->name('user.product.category');
 Route::get('store/{store}', [StoreController::class, 'userShow'])->name('user.store.show');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

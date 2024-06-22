@@ -36,6 +36,8 @@
                                 <td class="px-3 py-1">{{ $item->address }}</td>
                                 <td class="px-3 py-1">
                                     <form action="{{ route('store.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="text-red-500">Hapus</button>
                                     </form>
                                 </td>

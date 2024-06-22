@@ -44,7 +44,7 @@
                                 @if (Auth::user()->role == 'superadmin')
                                     <td class="px-3 py-1">Status</td>
                                 @endif
-                                <td class="px-3 py-1">Action</td>
+                                <td class="px-3 py-1 text-center">Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,12 +61,14 @@
                                     @if (Auth::user()->role == 'superadmin')
                                         <td class="px-3 py-1">{{ $item->is_accept ? 'Accepted' : 'Pending' }}</td>
                                     @endif
-                                    <td class="px-3 py-1 flex gap-3 items-center justify-center h-full w-full">
-                                        <div>
+                                    <td class="px-3 py-1 h-full w-min">
+                                        <div class="flex items-center justify-center gap-3 h-full">
+                                            <a href="{{ route('product.edit', $item->id) }}"
+                                                class="text-blue-500">Edit</a>
                                             <form action="{{ route('product.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="text-red-500 " type="submit">Hapus</button>
+                                                <button class="text-red-500" type="submit">Hapus</button>
                                             </form>
                                         </div>
 

@@ -112,7 +112,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $category = Category::all();
+        return view('master.product.edit', compact('product', 'category'));
     }
 
     /**
@@ -120,7 +121,54 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        if ($request->has('category_id')) {
+            $category = Category::find($request->category_id);
+            if ($category) {
+                $product->category_id = $request->category_id;
+            } else {
+                $newCategory = new Category();
+                $newCategory->name = $request->category_id;
+                $newCategory->save();
+                $product->category_id = $newCategory->id;
+            }
+        }
+        foreach ($product->link as $link) {
+            $link->delete();
+        }
+        $file = $request->file('foto');
+        if ($request->hasFile('foto')) {
+            unlink(public_path('storage/images/product/' . $product->foto));
+            $nama_file = date('y-m-d') . $file->getClientOriginalName();
+            $file->move('storage/images/product/', $nama_file);
+            $product->foto = $nama_file;
+        }
+        if ($request->gallery) {
+            foreach ($product->gallery as $galery) {
+                $galery->delete();
+            }
+            foreach ($request->gallery as $gallery) {
+                $file = $gallery;
+                $newGallery = new Galery();
+                $nama_file = date('y-m-d') . $file->getClientOriginalname();
+                $newGallery->name = $nama_file;
+                $file->move('storage/images/product/gallery/', $nama_file);
+                $newGallery->product_id = $product->id;
+                $newGallery->save();
+            }
+        };
+        foreach ($request->item as $links) {
+            $link = new Link();
+            $link->name = $links['name'];
+            $link->link = $links['link'];
+            $link->product_id = $product->id;
+            $link->save();
+        }
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -128,6 +176,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
+    }
+
+    public function userIndex()
+    {
+        $product = Product::all()->sortByDesc('created_at');
+        return view('master.product.user.index', compact('product'));
     }
 }

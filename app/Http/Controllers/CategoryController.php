@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -61,5 +62,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+    public function productFilter($category)
+    {
+        $product = Product::where('category_id', $category)->get();
+        return view('master.product.user.index', compact('product'));
     }
 }
